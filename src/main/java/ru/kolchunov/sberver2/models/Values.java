@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Entity for values_table
  */
 @Entity
-@Table(name = "values_table", schema = "testtask", catalog = "postgres")
+@Table(name = "values_table")
 public class Values {
     /**
      * Id value
@@ -31,7 +31,7 @@ public class Values {
      * Value
      */
     @Basic
-    @Column(name = "value", nullable = false, length = -1)
+    @Column(name = "value", nullable = false)
     private String value;
 
     public Long getId() {

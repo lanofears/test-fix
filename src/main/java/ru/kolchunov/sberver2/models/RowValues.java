@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Entity for row_values_table
  */
 @Entity
-@Table(name = "row_values_table", schema = "testtask", catalog = "postgres")
+@Table(name = "row_values_table")
 public class RowValues {
     /**
      * Id row

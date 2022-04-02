@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kolchunov.sberver2.requests.InsertDictRequest;
 import ru.kolchunov.sberver2.requests.SearchDictRequest;
-import ru.kolchunov.sberver2.responses.SearchDictResponse;
+import ru.kolchunov.sberver2.responses.FieldValue;
 import ru.kolchunov.sberver2.services.TableValuesService;
 
 @RestController
@@ -29,13 +29,13 @@ public class TableValuesController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<SearchDictResponse> searchByFields(@RequestBody SearchDictRequest searchDictRequest) {
+    public ResponseEntity<FieldValue> searchByFields(@RequestBody SearchDictRequest searchDictRequest) {
         HttpHeaders httpHeaders = new HttpHeaders();
 
         if (searchDictRequest == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        SearchDictResponse searchDictRes = tableValuesService.searchByFields(searchDictRequest);
+        FieldValue searchDictRes = tableValuesService.search(searchDictRequest);
         return new ResponseEntity<>(searchDictRes, httpHeaders, HttpStatus.CREATED);
     }
 

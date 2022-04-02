@@ -8,12 +8,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ru.kolchunov.sberver2.models.SearchCondition;
 import ru.kolchunov.sberver2.requests.InsertDictRequest;
 import ru.kolchunov.sberver2.requests.SearchDictRequest;
-import ru.kolchunov.sberver2.responses.SearchDictResponse;
+import ru.kolchunov.sberver2.responses.FieldValue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 class TableValuesServiceTest {
@@ -42,7 +41,7 @@ class TableValuesServiceTest {
         searchTerms.add(new SearchDictRequest.SearchTerm("first_long_field", "100001L", SearchCondition.EQUAL));
         searchTerms.add(new SearchDictRequest.SearchTerm("third_string_field", "str%", SearchCondition.LIKE));
         searchDictRequest.setSearchTerms(searchTerms);
-        SearchDictResponse searchDictResponse = tableValuesService.searchByFields(searchDictRequest);
+        FieldValue searchDictResponse = tableValuesService.search(searchDictRequest);
         System.out.println(searchDictResponse);
     }
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Entity for structure_dictionary_table
  */
 @Entity
-@Table(name = "structure_dictionary_table", schema = "testtask", catalog = "postgres")
+@Table(name = "structure_dictionary_table")
 public class StructureDictionary {
     /**
      * Id field
@@ -25,13 +25,13 @@ public class StructureDictionary {
     /**
      * Name field
      */
-    @Column(name = "name", nullable = false, length = -1)
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
     /**
      * Type data of the field
      */
     @Basic
-    @Column(name = "data_type", nullable = false, length = -1)
+    @Column(name = "data_type", nullable = false)
     private DataTypes dataType;
 
     public Long getId() {
