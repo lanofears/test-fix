@@ -24,7 +24,7 @@ public class TableValuesController {
         if (insertDictRequest == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        this.tableValuesService.save(insertDictRequest);
+        this.tableValuesService.insert(insertDictRequest);
         return new ResponseEntity<>(insertDictRequest, httpHeaders, HttpStatus.CREATED);
     }
 

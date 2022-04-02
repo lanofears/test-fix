@@ -8,20 +8,24 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.kolchunov.sberver2.models.DataTypes;
 import ru.kolchunov.sberver2.requests.CreateDictRequest;
+import ru.kolchunov.sberver2.requests.InsertDictRequest;
 import ru.kolchunov.sberver2.responses.DictionaryModel;
+import ru.kolchunov.sberver2.responses.FieldValue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-class DictionaryServiceImplTest {
+class DictionaryAndTableServiceTest {
+    @Autowired
+    private DictionaryService dictionaryService;
 
     @Autowired
-    DictionaryService dictionaryService;
+    private TableValuesService tableValuesService;
 
     @Test
-    void saveNewStructure() {
+    void saveNewStructureAndInsertRow() {
         CreateDictRequest createDictRequest = new CreateDictRequest();
         createDictRequest.setCode("TEST_CODE");
         createDictRequest.setName("SOME NAME");
@@ -37,5 +41,19 @@ class DictionaryServiceImplTest {
         Assertions.assertEquals("TEST_CODE", dictionary.getCode());
         Assertions.assertEquals("SOME NAME", dictionary.getName());
         Assertions.assertEquals(4, dictionary.getFields().size());
+
+        InsertDictRequest insertDictRequest = new InsertDictRequest();
+        insertDictRequest.setIdDict(dictionary.getId());
+        List<InsertDictRequest.FieldValue> fieldsValue = new ArrayList<>();
+        fieldsValue.add(new InsertDictRequest.FieldValue("first_long_field", "100001L"));
+        fieldsValue.add(new InsertDictRequest.FieldValue("second_boolean_field", "true"));
+        fieldsValue.add(new InsertDictRequest.FieldValue("third_string_field", "string_1"));
+        fieldsValue.add(new InsertDictRequest.FieldValue("fourth_date_field", "2022.03.30"));
+        insertDictRequest.setFieldsValue(fieldsValue);
+
+        List<FieldValue> values = tableValuesService.insert(insertDictRequest);
+
+        Assertions.assertNotNull(values);
+        Assertions.assertEquals(4, values.size());
     }
 }

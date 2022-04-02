@@ -8,5 +8,5 @@ import ru.kolchunov.sberver2.models.Values;
  * Repository interface for {@link Values}
  */
 @Repository
-public interface ValuesRepository extends JpaRepository<Values, Long> {
+public interface ValuesRepository extends JpaRepository<Values, Long>, SearchValuesRepository {
 }

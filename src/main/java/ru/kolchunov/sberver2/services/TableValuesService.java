@@ -4,6 +4,8 @@ import ru.kolchunov.sberver2.requests.InsertDictRequest;
 import ru.kolchunov.sberver2.requests.SearchDictRequest;
 import ru.kolchunov.sberver2.responses.FieldValue;
 
+import java.util.List;
+
 /**
  * Service for values functionality
  */
@@ -14,7 +16,7 @@ public interface TableValuesService {
      *
      * @param insertDictRequest {@link InsertDictRequest}
      */
-    void save(InsertDictRequest insertDictRequest);
+    List<FieldValue> insert(InsertDictRequest insertDictRequest);
 
     /**
      * Search rows by fields
